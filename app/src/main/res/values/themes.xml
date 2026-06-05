@@ -12,7 +12,7 @@
         <item name="colorOnSurface">@color/white</item>
         <item name="colorSurfaceVariant">@color/colorSurfaceVariant</item>
         <item name="colorOnSurfaceVariant">@color/grey_text</item>
-        <item name="colorBackground">@color/colorBackground</item>
+        <item name="android:colorBackground">@color/colorBackground</item>
         <item name="colorOnBackground">@color/white</item>
         <item name="android:windowBackground">@color/colorBackground</item>
         <item name="android:statusBarColor">@color/colorBackground</item>
