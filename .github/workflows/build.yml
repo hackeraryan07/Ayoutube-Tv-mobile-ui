@@ -24,27 +24,29 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      # ── 3. Install Gradle 8.2 from official Gradle servers ────────────
-      #    (replaces unreliable gradle-wrapper.jar raw-GitHub download)
+      # ── 3. Install Gradle 8.2 ─────────────────────────────────────────
       - name: Setup Gradle 8.2
         uses: gradle/actions/setup-gradle@v3
         with:
           gradle-version: "8.2"
 
-      # ── 4. Build Debug APK ─────────────────────────────────────────────
-      - name: Build Debug APK
+      # ── 4. Generate gradle-wrapper.jar ────────────────────────────────
+      #    The jar is not committed to the repo; generate it here so
+      #    ./gradlew works correctly for the build step below.
+      - name: Generate Gradle wrapper
         run: |
-          gradle assembleDebug --no-daemon 2>&1 || {
-            echo "=== BUILD FAILED — full log ==="
-            gradle assembleDebug --no-daemon --stacktrace --info 2>&1
-            exit 1
-          }
+          gradle wrapper --gradle-version 8.2 --distribution-type bin
+          chmod +x gradlew
 
-      # ── 5. Locate APK (helps debug path issues) ────────────────────────
+      # ── 5. Build Debug APK ─────────────────────────────────────────────
+      - name: Build Debug APK
+        run: ./gradlew assembleDebug --no-daemon --stacktrace
+
+      # ── 6. Locate APK (helps debug path issues) ────────────────────────
       - name: Find APK path
         run: find . -name "*.apk" -type f
 
-      # ── 6. Upload APK artifact ─────────────────────────────────────────
+      # ── 7. Upload APK artifact ─────────────────────────────────────────
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
