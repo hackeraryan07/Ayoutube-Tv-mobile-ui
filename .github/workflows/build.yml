@@ -37,7 +37,11 @@ jobs:
       - name: Build Debug APK
         run: |
           chmod +x ./gradlew
-          ./gradlew assembleDebug --no-daemon --stacktrace
+          ./gradlew assembleDebug --no-daemon 2>&1 || {
+            echo "=== BUILD FAILED — full log ==="
+            ./gradlew assembleDebug --no-daemon --stacktrace --info 2>&1
+            exit 1
+          }
 
       # ── 5. Locate APK (helps debug path issues) ────────────────────────
       - name: Find APK path

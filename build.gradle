@@ -1,13 +1,4 @@
-buildscript {
-    repositories {
-        google()
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:8.2.2'
-    }
-}
-
+// Top-level build file. Plugin versions are declared in settings.gradle pluginManagement.
 
 task clean(type: Delete) {
     delete rootProject.buildDir
