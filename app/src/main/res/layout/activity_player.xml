@@ -22,7 +22,7 @@
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:layout_gravity="center"
-            android:indeterminateTint="@color/colorPrimary" />
+            app:indeterminateTint="@color/colorPrimary" />
     </FrameLayout>
 
     <!-- Error overlay -->
@@ -42,7 +42,8 @@
             android:textColor="@color/white"
             android:textSize="16sp"
             android:gravity="center"
-            android:paddingHorizontal="24dp"
+            android:paddingStart="24dp"
+                android:paddingEnd="24dp"
             android:text="@string/error_load" />
 
         <com.google.android.material.button.MaterialButton
