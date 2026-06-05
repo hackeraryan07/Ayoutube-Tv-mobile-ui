@@ -26,7 +26,7 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_gravity="center"
-            app:indeterminateTint="@color/colorPrimary"
+            android:indeterminateTint="@color/colorPrimary"
             android:visibility="gone" />
 
         <!-- Error / empty state -->
