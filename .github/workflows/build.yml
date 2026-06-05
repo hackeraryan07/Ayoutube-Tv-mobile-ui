@@ -23,23 +23,20 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-          cache: gradle
 
-      # ── 3. Download gradle-wrapper.jar (not committed to repo) ─────────
-      - name: Download Gradle wrapper jar
-        run: |
-          mkdir -p gradle/wrapper
-          curl -sSL \
-            "https://raw.githubusercontent.com/gradle/gradle/v8.2.0/gradle/wrapper/gradle-wrapper.jar" \
-            -o gradle/wrapper/gradle-wrapper.jar
+      # ── 3. Install Gradle 8.2 from official Gradle servers ────────────
+      #    (replaces unreliable gradle-wrapper.jar raw-GitHub download)
+      - name: Setup Gradle 8.2
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: "8.2"
 
       # ── 4. Build Debug APK ─────────────────────────────────────────────
       - name: Build Debug APK
         run: |
-          chmod +x ./gradlew
-          ./gradlew assembleDebug --no-daemon 2>&1 || {
+          gradle assembleDebug --no-daemon 2>&1 || {
             echo "=== BUILD FAILED — full log ==="
-            ./gradlew assembleDebug --no-daemon --stacktrace --info 2>&1
+            gradle assembleDebug --no-daemon --stacktrace --info 2>&1
             exit 1
           }
 
