@@ -1,9 +1,12 @@
 package com.example.myapp;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import androidx.core.content.ContextCompat;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -47,6 +50,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
+        // android:tint is not valid on menu items in AAPT2 — apply tint here instead
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        if (searchItem != null && searchItem.getIcon() != null) {
+            searchItem.getIcon().setColorFilter(
+                ContextCompat.getColor(this, R.color.white),
+                PorterDuff.Mode.SRC_IN
+            );
+        }
         return true;
     }
 
