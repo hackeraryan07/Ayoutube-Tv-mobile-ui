@@ -23,7 +23,7 @@
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:layout_gravity="center"
-            app:indeterminateTint="@color/colorPrimary" />
+            android:indeterminateTint="@color/colorPrimary" />
     </FrameLayout>
 
     <!-- Error overlay -->
